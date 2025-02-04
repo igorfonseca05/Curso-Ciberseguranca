@@ -24,4 +24,21 @@ function getSimetrickey() {
     console.log('Base64URL:', base64urlKey);
 }
 
-getSimetrickey()
+// getSimetrickey()
+
+
+
+
+// Criando hash
+
+function gethash(senha) {
+    const hash = crypto.createHash("SHA-256").update(senha).digest().toString('hex')
+
+    // console.log(hash)
+    return hash
+}
+
+const senha1 = gethash('igorfonseca')
+const senha2 = gethash('igorfonseca2')
+
+console.log(senha1 === senha2)
