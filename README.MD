@@ -19,3 +19,40 @@ A **criptografia simétrica** depende de uma única chave para criptografar e de
 * **Twofish**: É um sucessor avançado do Blowfish, tendo sido desenvolvido para oferecer tamanho de bloco de **128 bits** além de flexibilidade e segurança. Apesar de sua eficiencia, o **AES** ainda é mais comumente utilizado.
 
 ⚠️ Vejo no arquivo simet.js como criar usar algoritmos de criptografia simétrico para codificar textos simples.
+
+### 🛠️ Passo a passo:
+
+- Gerar uma chave e um vetor de inicialização (IV)
+- Criptografar um texto
+- Descriptografar o texto criptografado
+
+```javascript
+const key = crypto.randomBytes(32); // chave simétrica
+const iv = crypto.randomBytes(16);, // chave de inicialização
+
+function simetric(text) {
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv)
+    let encrypted = cipher.update(text, 'utf-8', 'hex')
+
+    encrypted += cipher.final('hex')
+
+    return encrypted
+}
+
+const encryptedText = simetric('Arquivo confidencial')
+
+console.log(encryptedText)
+
+```
+
+no terminal veremos como resultado
+
+```bash
+773acd8b238aaf09d9d16aaf4444ec9724e3bd03
+```
+
+Uma vez que temos o arquivo criptgrafado, ao chegar ao destinatário devemos descritografar o texto enviado, podemos fazer isso com o código abaixo
+
+```javascript
+
+```
