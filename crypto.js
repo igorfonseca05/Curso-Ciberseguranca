@@ -38,7 +38,7 @@ function simetric(text) {
     const key = crypto.randomBytes(32)
     const iv = crypto.randomBytes(16)
 
-    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv)
+    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv)
     let encrypted = cipher.update(text, 'utf-8', 'hex')
 
     encrypted += cipher.final('hex')
@@ -49,12 +49,9 @@ function simetric(text) {
 
 
 function decrypt(dataObject) {
-
-    // console.log(dataObject)
-
     try {
 
-        const deCipher = crypto.createDecipheriv('aes-256-gcm', Buffer.from(dataObject.key, 'hex'), Buffer.from(dataObject.iv, 'hex'))
+        const deCipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(dataObject.key, 'hex'), Buffer.from(dataObject.iv, 'hex'))
 
         let decryptText = deCipher.update(dataObject.encrypted, 'hex', 'utf8')
 
@@ -68,10 +65,7 @@ function decrypt(dataObject) {
 
 }
 
-const data = 'If the server identifies the session based on this username, modifying its value might enable an attacker to impersonate other logged-in users. Similarly, if the isAdmin value is used for access control, this could provide a simple vector for privilege escalation.In the first couple of labs, you ll see some examples of how thes  vulnerabilities might look in real-world applications.'
-
-simetric('Arquivo confidencial')
-// decrypt(text)
+simetric('Bom dia')
 
 
 // // Criando hash
